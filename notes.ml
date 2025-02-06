@@ -113,4 +113,56 @@ let x = 1 + 2 in x * x;;
 
 let x = 10 in (let y = 20 in x * y);;
 
+(*use the left side value plug into whatever is after the in keyword*)
 
+(*output is 30 - x = 20 + x = 10 = 30*)
+let x = 10 in (let x = 20 in x) + x;;
+
+(*structs*)
+
+type point = {x:int; y:int};;
+
+let p1 = {x = 10; y = 20};;
+let p2 = {x = 1; y = 2};;
+p1.x;;
+p1.y;;
+
+(*access fields of struct with dot operator . *)
+
+type color_point = {x:int; y:int; mutable color:string};;
+
+let p3 = {x = 1; y = 1; color = "red"};;
+
+p3.color;;
+
+p3.color <- "blue";;
+
+(*anon functions*)
+
+fun x -> x * 2;;
+
+(*bind anon function to normal function*)
+let next = fun x -> x + 1;;
+
+(*nested functions*)
+
+let foo x =
+  let bar y = y * y in
+  bar x
+;;
+
+foo 2;;
+
+(*passing functions as arguments*)
+
+let apply f = f 10;;
+
+apply (fun x -> x * x);;
+
+(*higher order function - takes another func as arg*)
+
+let twice g x = g (g x);;
+
+let add x = x + 10;;
+
+twice add 1;;
