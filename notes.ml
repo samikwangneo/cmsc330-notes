@@ -28,7 +28,7 @@ let f x y = x :: y;;
 
 (*because you must prepend x to a list, y must be a list and the final list x :: y is a list itself*)
 
-let f (x:int list) y = (x :: y);;
+(*let f (x:int list) y = (x :: y);;*)
 
 (*append 2 lists*)
 [1;2;3]@[4;5;6];;
@@ -166,5 +166,107 @@ let twice g x = g (g x);;
 let add x = x + 10;;
 
 twice add 1;;
+
+let rec map f lst =
+  match lst with
+  | [] -> []
+  | h::t -> f h :: (map f t)
+;;
+
+map (fun x -> string_of_int x) [1;2;3;4;5];;
+
+(*takes a function with 2 args, an accumulator, and list
+ applies function to each member of the list with accumulator
+ reduce list into a single value*)
+let rec fold f acc lst = 
+  match lst with
+  | [] -> acc
+  | h::t -> fold f (f acc h) t
+;;
+
+let add a b = a + b;;
+
+(*adds 1 to 2 to 3 returns 6*)
+fold add 0 [1;2;3];;
+
+(* all numbres greater th
+
+   an 5*)
+fold (fun acc v -> v > 5 && acc) true [6;7;8;9;10];;
+
+(*more complex example*)
+
+let l = [[1;2;3;];[4;5;];[6;7]];;
+
+(*adds each sublist together*)
+map (fun x -> fold add 0 x) l;;
+
+(*folds the sublist answers together with + operator
+to get total sum of all the lists*)
+fold (+) 0 (map (fun x -> fold add 0 x) l);;
+
+(*does operations starting from the right to left*)
+let rec fold_right f acc lst =
+  match lst with
+  | [] -> acc
+  | h::t -> f h (fold_right f acc t)
+;;
+
+(*fold returns -6, fold_right returns 2*)
+fold (-) 0 [1;2;3];;
+fold_right (-) 0 [1;2;3];;
+
+(*can make a type*)
+type gen = Int of int
+          | Str of string
+          | Fl of float
+;;
+Int 10;; (*gen type*)
+Str "Hello";; (*gen type*)
+
+(*can make list of gen types cuz they are same gen type 
+even tho they are int vs string vs float*)
+[Int 4; Int 5; Str "Hello"; Str "World"; Fl 1.5];;
+
+type coin = Head | Tail;;
+
+(*type is 'coin list'*)
+[Head; Head; Tail];;
+
+(*processes the diff types*)
+let process x y =
+  match x, y with
+  | Int i, Int j -> Int (i + j)
+  | Str s, Str t -> Str (s ^ t)
+  |_ -> failwith "error"
+;;
+
+(*Adds ints, concatanates strings*)
+process (Int 10) (Int 20);;
+process (Str "Hello") (Str "World");;
+
+(*option*)
+(* could be none or could be some 'a'*)
+type 'a option = None | Some of 'a;;
+
+let hd l = 
+  match l with
+  | [] -> None
+  | h::_ -> Some h 
+;;
+
+hd [];; (*None*)
+hd [1;2;3];; (*Some 1*)
+hd ["good";"bad"];; (*Some good*);;
+
+(*option matching with list 
+overriding cons operator*)
+
+type list = Nil | Cons of int * list
+;;
+
+Nil;;
+Cons (1, Nil);;
+Cons (1, (Cons (2, Cons (3, Nil))));;
 
 
