@@ -26,3 +26,18 @@ f) (float -> bool) -> float -> float -> bool
 g) bool -> int -> int -> int -> int
 *)
 
+(*2/14 discussion, map and fold*)
+
+let list_add x nums = 
+  List.map (fun elem -> x + elem) nums
+
+let mold f lst = List.fold_left (fun a x -> a @ [(f x)]) [] lst 
+
+let list_sum_product lst = 
+  let (sum, product, index) = List.fold_left 
+    (fun (even, odd, i) num -> 
+      if i mod 2 = 0 
+        then (even + num, odd, i + 1) 
+        else (even, odd * num, i + 1)) 
+    (0, 1, 0) lst 
+  in (sum, product, sum = product);;

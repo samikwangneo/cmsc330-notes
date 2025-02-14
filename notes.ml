@@ -189,9 +189,7 @@ let add a b = a + b;;
 (*adds 1 to 2 to 3 returns 6*)
 fold add 0 [1;2;3];;
 
-(* all numbres greater th
-
-   an 5*)
+(* all numbres greater than 5*)
 fold (fun acc v -> v > 5 && acc) true [6;7;8;9;10];;
 
 (*more complex example*)
