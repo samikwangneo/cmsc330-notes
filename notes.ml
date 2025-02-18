@@ -267,4 +267,41 @@ Nil;;
 Cons (1, Nil);;
 Cons (1, (Cons (2, Cons (3, Nil))));;
 
+(*2/18*)
+
+(*
+code: fun y -> y * 2
+env: x = 10;
+
+(fun x -> x + y, ([y,10]; (a,20)))
+
+(*tail recursion:*)
+
+exit point:
+let rec fact n =
+  if n = 0 then
+    1
+  else
+    fact (n-1) * n
+;;
+
+fold_left f (f acc h) t
+fold_right f acc (fold_right f acc t)
+*)
+
+(* imperative OCaml*)
+
+(*
+f(x) + f(x) + f(x) = 3v
+
+f(x) = v
+
+1) side effect
+2) aliasing:
+3) order of evaluation
+
+foo 1+2 3+4
+[f a; f b; f c]
+*)
+
 
