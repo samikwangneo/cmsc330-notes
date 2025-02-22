@@ -267,6 +267,116 @@ Nil;;
 Cons (1, Nil);;
 Cons (1, (Cons (2, Cons (3, Nil))));;
 
+(*2/13 lecture notes (watching recording)*)
+
+(*can have list of functions
+
+List.map can apply funciton to every funuction in list
+
+but this would actually apply each function in the list to 
+a starting value
+
+List.map (fun f -> f 10) l1
+
+if first func in l1 is neg, and second is double
+
+this returns [-10, 20] *)
+
+(*return only odd nums*)
+
+let filter_odd =
+
+List.rev(List.fold_left (
+  fun acc x -> if x mod 2 = 0 then acc else x::acc
+) [] [1;2;3;4;5;6;7] )
+;;
+
+(*trees*)
+
+type tree = 
+  | Leaf 
+  | Node of tree * int * tree
+;;
+Leaf;;
+let t1 = Node(Leaf, 10, Node(Leaf, 20, Leaf));;
+
+(*Node is made up of left tree, int, then a right tree
+leaf by itself is a tree or can be another Node*)
+
+(* sum the nodes in a tree recursively*)
+let rec sum t =
+  match t with
+  | Leaf -> 0
+  | Node (l, v, r) -> v + sum l + sum r
+;;
+
+sum t1;;
+
+(* currying *)
+
+(*multi argument function takes its args one at a time*)
+
+let add a b = a + b;;
+(* int -> int -> int *)
+
+(*can only do add 10;; -> it works
+
+returns another function that is just int -> int
+
+can use that new function and apply the second arg*)
+
+let g = add 10;;
+add 10 20;;
+g 20;;
+(*both return 30
+g is a function that already takes the 10 into account
+just needs the second value *)
+
+(* closure:
+  2 parts:
+    1) function
+    2) env
+*)
+
+(* returns a function that takes x and adds to y*)
+let foo x = 
+  fun y -> x + y
+;;
+
+(*body and environment
+carries environment thru multiple calls
+remembers the value of x for the next function
+*)
+(foo 10) 20;;
+
+let g = foo 10;;
+g 20;;
+
+(* all return 30 *)
+(* currying is implemented due to closure 
+   otherwise it wouldnt be able to remember *)
+(* remember 2 pieces, the code and the env*)
+
+(* normal recursive function*)
+
+let rec fact n  =
+  if n == 0 then 1 
+  else n * fact (n - 1)
+;;
+
+(*tail recursion, more optimized*)
+
+let rec fact2 n acc =
+  if n = 0 then acc
+  else fact2 (n - 1) (acc * n)
+;;
+
+(* List.fold_left -> tail recursive
+  List.fold_right -> not tail recursive 
+so fold_left will be work for very big lists, fold_right
+will get stack overflow cuz needs to store all numbers
+in stack*)
+
 (*2/18*)
 
 (*
