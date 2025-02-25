@@ -401,6 +401,38 @@ fold_right f acc (fold_right f acc t)
 
 (* imperative OCaml*)
 
+(* notes from 2/18 slides on imperative OCaml
+references:
+  ref : 'a -> 'a ref = allocate reference
+  ! : 'a ref -> 'a = read value stored in reference
+  := : 'a ref -> 'a -> unit = change value stored in reference
+
+  binding a variable to a reference is immutable
+  i.e. cannot disconnect a var from a reference
+  but the contents of the reference can change
+  basically like pointers in C
+*)
+
+let z = 3;;
+let x = ref z;; (* val x : int ref = {contents = 3}*)
+let y = x;;
+x := 4;; (* changes value x refs to to 4*)
+!y;; (*dereferences y reference, gives value it stores (3)*)
+
+(*x and y are aliases i.e. point to same location
+changing contents of location cause !x and !y to change*)
+
+(*
+ref e has type : t ref
+e1 := e2 has type : unit
+!e has type : t 
+e1;e2 = separater, same as let () = e1 in e2
+  evals e1, then evals e2, returns e2
+  ;; ends an expression and gives value
+  ; just separates expressions, has type t
+ *)
+
+
 (*
 f(x) + f(x) + f(x) = 3v
 
@@ -412,6 +444,83 @@ f(x) = v
 
 foo 1+2 3+4
 [f a; f b; f c]
+*)
+
+(*----------------------------------*)
+(*2/25 lecture notes*)
+(*
+Regex review
+
+[abc] : match a or b or c 
+[^abc] : match anything but a or b or c 
+a{n} : exactly n repetitions of a 
+{m, n} : at least m and at mos tn repetitions
+
+LEC SLIDE* Capturing groups
+Discussion notes** very helpful https://github.com/cmsc330spring25/spring25/tree/main/discussions/d4_pbt_regex
+
+Big part of quiz is Regex
+
+Regex practice:
+  Contains exactly 2 b's, not neccesarily consecutive
+    ^ [^b]* b [^b]* b [^b]* $
+  Starts with c, followed by one lowercase vowel, ends with any lowercase letters
+    ^c [aeiou] [a-z]* $
+  Starts with a and has exactly 0 or 1 letter after
+    ^a [a-zA-z]? $
+  Only lowercase letters, alphabetic order, any amount
+    ^ a*b*c* ... z* $
+  Even length string
+    ^ (..)* $
+    . means any character, .. means any 2 chars
+*)
+
+(* New lecture content *)
+(*
+
+alphabet: all the possible symbols
+Sigma: (0, 1)
+String: finite nuber of symbols from alphabet
+Language: set of strings based on a rule
+Binary has a rule, phone # has rule, email has rule, etc
+
+Regular language : formal language, defined by a regular expression 
+S: String
+
+Must decide if string S belonds to language L, defined by R (regex)
+
+Re.match: R S ==> Yes/No? (Does S belong to lang defined by R?)
+
+R = (ab|cd)*      S = abcdcdcdcdab
+
+Finite state machine : mathematical model that does this
+  - Has finite number of states 
+  - One is the start state, depicted by -> 
+  - Multiple final states
+  - Can accept or reject a state (node)
+  - Given an input, e.g. abaab 
+  - Put chars in machine one at a time 
+  - Follow the arrows mapped depending on the char 
+  - If end up at repeating state -> accept string
+  - If end up at unsure state -> reject string
+Ex:
+  E = {5, 10, 25}
+  Graph defined by nodes of the set, choose 5,10,25 each time to reach 25 
+  Curr value is a node's state
+
+  0 -> 5 -> 10 -> 15 -> 20 -> 25
+                     -> 25
+               -> 20 -> 25
+         -> 15 -> 20 -> 25
+               -> 25
+         -> 20 -> 25
+  0 -> 10 -> 15 -> 20 -> 25
+          -> 20 -> 25  
+  0 -> 25 
+
+Can convert FSM <-> Regex (both ways)
+
+
 *)
 
 
