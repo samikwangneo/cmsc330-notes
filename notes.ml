@@ -523,4 +523,72 @@ Can convert FSM <-> Regex (both ways)
 
 *)
 
+(*2/27 lecture notes NFA and DFA *)
+
+(*review of some regex rules and finite state machine *)
+
+(* 
+DFA: deterministic finite automata
+NFA: non-deterministic finite automata
+
+DFA:
+  - Only one path per character
+  - Cant have multiple paths for an 'a'
+  - No epsilons, every time it takes a path the machine must consume something
+  - Can have multiple accepting states
+
+NFA:
+  - From input a can go to multiple states
+  - Also can go from one state to another without consuming anything (epsilon)
+  - Many different options/paths, as long as there 1 correct path it works
+  - Easy to convert regex to DFA
+  - Can have multiple accepting states
+
+How to go from regex to NFA:
+  - Empty set : start -> accept
+  - Empty string : start -> epsilon ""
+  - Delta d (wat is this) : start -> a accept
+  - M1 and M2 are just characters 
+  - Union a | b : start -> epsilon -> M1 -> epsilon -> accept
+                        -> epsilon -> M2 -> epsilon -> ^
+  - Concat ab : start -> M1 -> epsilon -> M2 -> accept
+  - clean closure a* : start -> epsilon -> M -> epsilon -> accept
+                             -> accept
+                                                        <- start
+NFA to DFA algo:
+  (from github)
+
+e-closure: going from one state to another just using epsilon transition
+R = all the states in the new machine, list of states
+
+confusing ahh lecture
+*)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
