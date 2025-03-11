@@ -563,4 +563,55 @@ R = all the states in the new machine, list of states
 
 confusing ahh lecture
 *)
+(*3/11 lecture notes*)
 
+(*
+
+Contex free grammar:
+  Used to recognize computer languages
+  superset of regex i.e. can recognize palindromes and ()
+  Start with symbol S and apply modifications to reach desired string
+  Variables exist to represent certain strings
+
+Palindrome:
+S -> aSa | bSb | a | b | epsilon 
+
+Derivation:
+  starting from S -> find a path to generate string
+  i.e. S -> aSa -> abSba -> abba 
+  finding this is called PARSING
+
+Drawing this process = Parse Tree
+
+Leftmost derivation:
+  Always rewrite the leftmost variable
+  S -> AB 
+  A -> a 
+  B -> b 
+  Must finish with left entirely before going right
+
+Expression CFG:
+  E -> E+E | E-E | E*E | (E) | 1 | 2 | 3 | 4
+
+Abstract syntax tree (AST)
+- Simplified version of parse tree
+
+Ex.
+(2+3)*4-3
+
+E -> E-E -> E*E-E -> (E)*E-E -> (E+E)*E-E -> (2+3)*4-3
+
+If can find more than one leftmoster derivation for a string -> ambigious
+Don't want ambiguity in your CFG
+
+
+
+
+
+
+
+
+
+
+
+*)
