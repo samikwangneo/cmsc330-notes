@@ -603,15 +603,67 @@ E -> E-E -> E*E-E -> (E)*E-E -> (E+E)*E-E -> (2+3)*4-3
 
 If can find more than one leftmoster derivation for a string -> ambigious
 Don't want ambiguity in your CFG
-
-
-
-
-
-
-
-
-
-
-
 *)
+
+(*3/25 lecture notes*)
+
+(*
+OCaml Parsing 
+
+tokenizing -> converts text input into stream of tokens
+
+scanner ignores whitespace
+
+top down parsing into parse tree
+
+recursve descent parsing -> to get leftmost derivation
+use lookahead() and match_token()
+
+returns tuple of ast and token list for remainder of string
+
+Basic grammar with tokens:
+  S -> A Tok_Add S | A A 
+  A -> B Tok_Mult A | B 
+  B -> Tok_Num | Tok_LParen S Tok_RParen 
+
+Rules are lego blocks
+Apply the rules recursively to make the lego piece
+
+Rules of inference:
+  Num and Sum:
+    Num:
+    n -> n = axiom 
+    
+    Sum:
+    to evaluate e1 + e2 -> n3
+    e1 -> n1, e2 -> n2
+    e1 + e2 -> n3
+    conclusion: n3 = n1 + n2
+
+  eval (Sum (Num 10, Num 5)) = 15
+  process is called derivation
+
+  Let:
+    to eval let x = e1 in e2 -> v2 
+    e1 -> v1
+    e2 {v1/x} -> v2 (replace every x with v1, use subst func)
+    then eval e2 to get final res v2
+
+Definitional Interpreter:
+  Style of rules that results in interpreter as a recursive function
+  matches with:
+  | Ident
+  | Num
+  | Plus
+  | Let
+
+Derivations = Interpreter Call Trees
+  - Same shape of recursive calls
+
+Semantics define meaning of program
+
+
+
+
+
+ *)
