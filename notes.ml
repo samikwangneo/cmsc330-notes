@@ -662,8 +662,26 @@ Derivations = Interpreter Call Trees
 
 Semantics define meaning of program
 
-
-
-
-
  *)
+
+(*3/27 lectures notes*)
+(*
+
+To define an environment, represented as (id * value) list
+Newly defined vars in environment shadow the old vars when looked up
+
+eval [("x", 10)] (Ident "x") -> 10
+
+A(x) = v -> look up var x in environment A 
+A,x:v1 -> extend A by mapping x to value v1
+A1, A2, etc -> represents a different environment
+
+(*4/1 lecture notes (APRIL FOOLS)*)
+
+type checking code
+- Binop and If conditions
+- Use typecheck function to pass a parsed expr through it 
+- Returns the type of the expression, TypeError otherwise 
+- Let condition for the environment, checks if val and env matches
+- 
+*)
