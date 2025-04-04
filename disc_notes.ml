@@ -99,3 +99,30 @@ meta characters - shortcuts for ranges
 
 3/7 discussion notes *)
 
+(*4/4 discussion notes OPSEM*)
+(*
+
+Type checking w/ opsem 
+G: is like env for a type 
+- Start from bottom
+- What rules is it matching on to
+- Get to base case then stop and go back up
+e: int, eq0 e: bool, etc
+
+Type inference:
+  - Constraint construction
+    - Create set of constraints
+    - Represented by C1, C2, C3
+    - At end union them all together
+    - Well typed if no conflicts
+    - Conflict is type error, e.g. int:bool or bool:int
+    - If int:int then the type matches
+    - Ex. true && eq0 5
+    - With type inference, use -| to rep. conclusion
+  - Constraint solving
+
+
+
+
+*)
+
