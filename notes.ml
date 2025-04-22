@@ -685,3 +685,7 @@ type checking code
 - Let condition for the environment, checks if val and env matches
 - 
 *)
+
+(*4/22 notes*)
+
+
