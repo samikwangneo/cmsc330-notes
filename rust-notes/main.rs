@@ -59,10 +59,44 @@ fn main() {
     //
     //println!("{:?}", p1)
     
-    // When borrowing, have to dereference to get its value
+    //When borrowing, have to dereference to get its value
     
+    /* LECTURE 4/29 - garbage collection
+    .static (global) during entire execution
+    .Stack fast alloc/dealloc, stack is small tho 
+    .Heap has lot of memory
     
+    Can use malloc(); to alloc memory to heap
+    Implemented as linked list, just like C 
+    Defragmentation, having small empty spaces is fragmentation
+        This is not possible in C since uses pointers, only Java, OCaml, etc 
     
+    Reference counting:
+        let x = new Obj();
+        let y = x;
+    
+    X and y are pointing to the same Obj
+        x = null;
+    
+    Breaks the link of x
+        y = new another();
+    
+    Breaks link of y, previous Obj becomes DEAD, garbage it 
+    Rc in Rust = reference count 
+    If there is a cycle, ref count gets cooked, garbage doesnt get collected
+    Only trash it if no references to the Obj
+    
+    Mark and sweep:
+        Visit entire heap, mark the unreachable objs (no refs)
+        Visit again, and trash the marked garbage
+        Does not move live objects, so doesn't defragment 
+        Slower
+    
+    Copy:
+        2 mirrored heaps, if reachable then copy it to new one 
+        Don't copy unreachable ones
+
+    *\
 
 }
 
