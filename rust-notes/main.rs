@@ -98,6 +98,32 @@ fn main() {
 
     *\
 
+    /* 5/8 LECTURE NOTES 
+
+    Can drop objects using drop(x);
+    Same as calling free
+
+    {} defines scoping of a variable
+
+    Can't use a var after drop
+
+    unsafe {} -> just like C code 
+
+    What we learned in 330:
+
+    OCaml:
+        functional programming
+        recursive functions
+        code as data, functions are first class, funs can be args or return val 
+        closure 
+        pattern matching
+        regex, fsa, state design
+        lexing, parsing, CFG
+        lambda calc
+        rust 
+        software security
+        
+
 }
 
 
